@@ -56,6 +56,8 @@ namespace TennisBookings.Web
             services.Configure<ContentConfiguration>(Configuration.GetSection("Content"));
             services.AddSingleton<IContentConfiguration>(sp =>
                 sp.GetRequiredService<IOptions<ContentConfiguration>>().Value);
+            services.AddSingleton<FileProcessingChannel>();
+                
 
             services
                 .AddAppConfiguration(Configuration)
@@ -81,6 +83,8 @@ namespace TennisBookings.Web
             {
                 services.AddHostedService<WeatherCacheService>();
             }
+
+            services.AddHostedService<FileProcessingService>();
            
             services.AddControllersWithViews();
             services.AddRazorPages(options =>

@@ -13,6 +13,9 @@ namespace TennisBookings.ResultsProcessing
             using var reader = new StreamReader(stream);
             using var csv = new CsvReader(reader);
 
+            csv.Configuration.HeaderValidated = null;
+            csv.Configuration.MissingFieldFound = null;
+      
             csv.Configuration.CultureInfo = CultureInfo.InvariantCulture;
             
             var records = csv.GetRecords<TennisMatchRow>();
